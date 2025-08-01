@@ -601,6 +601,31 @@ let cart = {};
             document.getElementById(itemId + '-qty').textContent = cart[itemId];
             updateTotal();
         }
+function updateTotal() {
+            let total = 0;
+            let billItemsHtml = '';
+            let hasItems = false;
+
+            for (let itemId in cart) {
+                if (cart[itemId] > 0) {
+                    hasItems = true;
+                    const itemTotal = cart[itemId] * menuItems[itemId].price;
+                    total += itemTotal;
+                    billItemsHtml += `
+                        <div class="bill-item">
+                            <span>${menuItems[itemId].name} x${cart[itemId]}</span>
+                            <span>$${itemTotal.toFixed(2)}</span>
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById('total-amount').textContent = total.toFixed(2);
+            document.getElementById('final-total').textContent = total.toFixed(2);
+            document.getElementById('bill-items').innerHTML = billItemsHtml;
+            document.getElementById('bill-details').style.display = hasItems ? 'block' : 'none';
+            document.getElementById('place-order-btn').disabled = !hasItems;
+        }
 
 
 
