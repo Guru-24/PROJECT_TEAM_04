@@ -585,6 +585,22 @@ body {
             'mocktails': { name: 'Mocktails', price: 9 }
         };
 
+let cart = {};
+
+        function changeQuantity(itemId, change) {
+            if (!cart[itemId]) {
+                cart[itemId] = 0;
+            }
+            
+            cart[itemId] += change;
+            
+            if (cart[itemId] < 0) {
+                cart[itemId] = 0;
+            }
+            
+            document.getElementById(itemId + '-qty').textContent = cart[itemId];
+            updateTotal();
+        }
 
 
 
