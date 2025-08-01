@@ -626,7 +626,24 @@ function updateTotal() {
             document.getElementById('bill-details').style.display = hasItems ? 'block' : 'none';
             document.getElementById('place-order-btn').disabled = !hasItems;
         }
+function placeOrder() {
+            const total = document.getElementById('total-amount').textContent;
+            document.getElementById('popup-total').textContent = total;
+            document.getElementById('popup-overlay').style.display = 'flex';
+        }
 
+        function closePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+            // Reset cart
+            cart = {};
+            for (let itemId in menuItems) {
+                document.getElementById(itemId + '-qty').textContent = '0';
+            }
+            updateTotal();
+        }
+
+        // Initialize
+        updateTotal();
 
 
            
